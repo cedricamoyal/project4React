@@ -29253,11 +29253,19 @@
 	    handleClick: function handleClick(e) {
 	        var allVisits = this.state.favouriteVisits.slice(0); // Make a copy of the current state
 	        allVisits.push(e.currentTarget.id); // Add the string into that
-	        console.log(allVisits);
 	        this.setState({
 	            favouriteVisits: allVisits
 	        });
-	        console.log("fav visits" + this.state.favouriteVisits);
+	    },
+	    refreshVisitList: function refreshVisitList(e) {
+	        e.preventDefault();
+	        this.setState({
+	            favouriteVisits: []
+	        });
+	        for (var i = 0; i < markers.length; i++) {
+	            markers[i].setMap(null);
+	        };
+	        markers = [];
 	    },
 
 	    render: function render() {
@@ -29328,48 +29336,64 @@
 	                null,
 	                'My trip steps:'
 	            ),
-	            this.state.favouriteVisits.map(function (l) {
+	            _react2.default.createElement(
+	                'div',
+	                { id: 'myTripSteps' },
+	                this.state.favouriteVisits.map(function (l) {
 
-	                var visitList2 = [{ country: 'Argentina', name: 'Buenos Aires', lat: -34.603333, long: -58.381667, url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001 }, { country: 'Argentina', name: 'Iguazu Falls', lat: -25.686667, long: -54.444722, url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002 }, { country: 'Argentina', name: 'Mendoza', lat: -32.883333, long: -68.816667, url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003 }, { country: 'Bolivia', name: 'Uyuni', url: 'http://images.boomsbeat.com/data/images/full/917/1-jpg.jpg', id: 1004 }, { country: 'Chile', name: 'Atacama', url: 'http://i.telegraph.co.uk/multimedia/archive/03225/atacama-desert_3225940c.jpg', id: 1005 }, { country: 'Colombia', name: 'Medellin', url: 'http://xpat.s3.amazonaws.com/wp-content/uploads/2015/08/28151313/2Escobars_PabloEscobar.jpg', id: 1006 }, { country: 'Paraguay', name: 'Asunción', url: 'http://w0.fast-meteo.com/system/images/9564/large/asuncion_palacio.jpg?1349525174', id: 1007 }, { country: 'Uruguay', name: 'Punta Del Este', url: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Thehandofpuntadeleste.jpg', id: 1008 }];
+	                    var visitList2 = [{ country: 'Argentina', name: 'Buenos Aires', lat: -34.603333, long: -58.381667, url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001 }, { country: 'Argentina', name: 'Iguazu Falls', lat: -25.686667, long: -54.444722, url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002 }, { country: 'Argentina', name: 'Mendoza', lat: -32.883333, long: -68.816667, url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003 }, { country: 'Bolivia', name: 'Uyuni', lat: -20.133775, long: -67.489133, url: 'http://images.boomsbeat.com/data/images/full/917/1-jpg.jpg', id: 1004 }, { country: 'Chile', name: 'Atacama', lat: -24.5, long: -69.25, url: 'http://i.telegraph.co.uk/multimedia/archive/03225/atacama-desert_3225940c.jpg', id: 1005 }, { country: 'Colombia', name: 'Medellin', lat: 6.230833, long: -75.590556, url: 'http://xpat.s3.amazonaws.com/wp-content/uploads/2015/08/28151313/2Escobars_PabloEscobar.jpg', id: 1006 }, { country: 'Paraguay', name: 'Asunción', lat: -25.266667, long: -57.633333, url: 'http://w0.fast-meteo.com/system/images/9564/large/asuncion_palacio.jpg?1349525174', id: 1007 }, { country: 'Uruguay', name: 'Punta Del Este', lat: -34.966667, long: -54.95, url: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Thehandofpuntadeleste.jpg', id: 1008 }];
 
-	                var visitUrl = "";
-	                var visitLat;
-	                var visitLong;
+	                    var visitUrl = "";
+	                    var visitLat;
+	                    var visitLong;
 
-	                var marker;
+	                    var marker;
 
-	                console.log(visitList2);
-	                for (var i = 0; i < visitList2.length; i++) {
-	                    if (visitList2[i].name == l) {
-	                        visitUrl = visitList2[i].url;
-	                        visitLat = visitList2[i].lat;
-	                        visitLong = visitList2[i].long;
-	                        markerLabel += 1;
+	                    console.log(visitList2);
+	                    for (var i = 0; i < visitList2.length; i++) {
+	                        if (visitList2[i].name == l) {
+	                            visitUrl = visitList2[i].url;
+	                            visitLat = visitList2[i].lat;
+	                            visitLong = visitList2[i].long;
+	                            markerLabel += 1;
 
-	                        map.setCenter({ lat: visitLat, lng: visitLong });
+	                            map.setCenter({ lat: visitLat, lng: visitLong });
 
-	                        marker = new google.maps.Marker({
-	                            position: { lat: visitLat, lng: visitLong },
-	                            map: map,
-	                            label: markerLabel.toString(),
-	                            title: 'Hello World!'
-	                        });
+	                            marker = new google.maps.Marker({
+	                                position: { lat: visitLat, lng: visitLong },
+	                                map: map,
+	                                label: markerLabel.toString(),
+	                                title: 'Hello World!'
+	                            });
+	                            markers.push(marker);
+	                        }
 	                    }
-	                }
 
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: l, className: 'details' },
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        ' ',
-	                        l,
-	                        ' '
-	                    ),
-	                    _react2.default.createElement('img', { src: visitUrl, alt: l })
-	                );
-	            }),
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { key: l, className: 'details' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            ' ',
+	                            markerLabel.toString(),
+	                            ': ',
+	                            l,
+	                            ' '
+	                        ),
+	                        _react2.default.createElement('img', { src: visitUrl, alt: l })
+	                    );
+	                })
+	            ),
+	            _react2.default.createElement(
+	                'form',
+	                { onSubmit: this.refreshVisitList },
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Refresh visit list'
+	                )
+	            ),
 	            _react2.default.createElement('hr', null),
 	            _react2.default.createElement(
 	                'h5',

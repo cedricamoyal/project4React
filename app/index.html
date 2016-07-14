@@ -48,7 +48,7 @@
 
   #todo {
     position: fixed;
-    bottom: 10px;
+    top: 10px;
     right: 10px;
     width: 210px;
     border: 1px dashed black;
@@ -113,6 +113,8 @@
 <script>
 var map;
 
+var markers = [];
+
 var visitList3 = [
     { country: 'Argentina',name: 'Buenos Aires',lat: -34.603333,long: -58.381667, url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001},
     { country: 'Argentina',name: 'Iguazu Falls',lat: -25.686667,long: -54.444722, url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002},
@@ -120,7 +122,7 @@ var visitList3 = [
 ];
 
 
-function initMap() {
+function initMap () {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: visitList3[0].lat, lng: visitList3[0].long},
     zoom: 4
