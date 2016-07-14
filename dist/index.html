@@ -4,10 +4,134 @@
   <meta charset="UTF-8">
   <title>Github app</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+  <!-- google map api key: -->
+  <!-- AIzaSyCBn7DpJMQcSgoCbwtUo8q0IJ-hISQ8chs -->
+
+<!-- Lets check the dist -->
+  <style>
+    .appear-enter {
+      transition: opacity 0.5s ease-out;
+      opacity: 0;
+    }
+    .appear-enter.appear-enter-active {
+      opacity: 1;
+    }
+    .appear-leave {
+      opacity: 0;
+    }
+
+  img {
+    width: 80px;
+    margin-top: 5px;
+  }
+
+  p {
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+
+  .details {
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  display: inline-block;
+  height: 100px;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+  #todo {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 210px;
+    border: 1px dashed black;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    text-align: center;
+  }
+
+  #map {
+    border: 1px dashed black;
+    height: 600px;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+
+
+  h5 {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  li {
+    margin-bottom: 1px;
+    margin-top: 1px;
+  }
+
+  hr {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+  ul {
+    margin-bottom: 3px;
+    /*border: 1px solid red;*/
+  }
+
+  form {
+    margin-bottom: 3px;
+  }
+
+  input {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+
+
+  </style>
+
 </head>
 <body>
 
   <div id="app"></div>
+
+  <div id="todo"></div>
+
+
+
+
+
+<script>
+var map;
+
+var visitList3 = [
+    { country: 'Argentina',name: 'Buenos Aires',lat: -34.603333,long: -58.381667, url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001},
+    { country: 'Argentina',name: 'Iguazu Falls',lat: -25.686667,long: -54.444722, url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002},
+    { country: 'Argentina',name: 'Mendoza',lat: -32.883333,long: -68.816667, url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003}
+];
+
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: visitList3[0].lat, lng: visitList3[0].long},
+    zoom: 4
+  });
+}
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBn7DpJMQcSgoCbwtUo8q0IJ-hISQ8chs&callback=initMap" async defer></script>
+
 
 <script type="text/javascript" src="index_bundle.js"></script></body>
 </html>

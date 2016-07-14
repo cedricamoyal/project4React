@@ -10,7 +10,7 @@ import Countries from '../components/Countries';
 const routes = (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={Countries} />
       <Route path="/search" component={Search} />
       <Route path="/details/:username" component={UserDetails} />
       <Route path="/countries" component={Countries} />

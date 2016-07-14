@@ -7,4 +7,4 @@ ReactDOM.render( Routes, document.getElementById("app"));
 
 import ToDo from './components/todo';
 
-import GoogleMap from './components/googleMap';
+// import GoogleMap from './components/googleMap';

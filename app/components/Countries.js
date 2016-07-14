@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+//google map api key:
+// AIzaSyCBn7DpJMQcSgoCbwtUo8q0IJ-hISQ8chs
+
 //
 // class AllUsers extends Component {
 //
@@ -18,7 +21,6 @@ import ReactDOM from 'react-dom';
 // };
 //
 // export default AllUsers;
-
 
 // Let's create a "real-time search" component
 
@@ -44,6 +46,7 @@ var Countries = React.createClass({
           favouriteVisits: allVisits
         });
         console.log("fav visits" + this.state.favouriteVisits);
+
     },
 
     render: function() {
@@ -59,13 +62,15 @@ var Countries = React.createClass({
       var visitList = [
           { country: 'Argentina',name: 'Buenos Aires', url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001},
           { country: 'Argentina',name: 'Iguazu Falls', url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002},
-          { country: 'Argentina',name: 'Merida', url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003},
+          { country: 'Argentina',name: 'Mendoza', url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003},
           { country: 'Bolivia',name: 'Uyuni', url: 'http://images.boomsbeat.com/data/images/full/917/1-jpg.jpg', id: 1004},
           { country: 'Chile',name: 'Atacama', url: 'http://i.telegraph.co.uk/multimedia/archive/03225/atacama-desert_3225940c.jpg', id: 1005},
           { country: 'Colombia',name: 'Medellin', url: 'http://xpat.s3.amazonaws.com/wp-content/uploads/2015/08/28151313/2Escobars_PabloEscobar.jpg', id: 1006},
           { country: 'Paraguay',name: 'Asunción', url: 'http://w0.fast-meteo.com/system/images/9564/large/asuncion_palacio.jpg?1349525174', id: 1007},
           { country: 'Uruguay',name: 'Punta Del Este', url: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Thehandofpuntadeleste.jpg', id: 1008}
       ];
+
+      var markerLabel = 0;
 
       var searchString = this.state.searchString.trim().toLowerCase();
 
@@ -113,14 +118,14 @@ var Countries = React.createClass({
                         }) }
 
                     <hr />
-                    <h5>My favorite visits:</h5>
+                    <h5>My trip steps:</h5>
 
                       { this.state.favouriteVisits.map(function(l){
 
                         var visitList2 = [
-                            { country: 'Argentina',name: 'Buenos Aires', url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001},
-                            { country: 'Argentina',name: 'Iguazu Falls', url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002},
-                            { country: 'Argentina',name: 'Merida', url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003},
+                            { country: 'Argentina',name: 'Buenos Aires',lat: -34.603333,long: -58.381667, url: 'https://c1.staticflickr.com/9/8424/7820374048_1a088f2dd3_b.jpg', id: 1001},
+                            { country: 'Argentina',name: 'Iguazu Falls',lat: -25.686667,long: -54.444722, url: 'https://cdn.audleytravel.com/-/-/79/221006200144059077123219118169126227011162120009.jpg', id: 1002},
+                            { country: 'Argentina',name: 'Mendoza',lat: -32.883333,long: -68.816667, url: 'http://argentina-travel-blog.sayhueque.com/wp-content/uploads/2015/10/Lugares-turisticos-de-Mendoza.jpg', id: 1003},
                             { country: 'Bolivia',name: 'Uyuni', url: 'http://images.boomsbeat.com/data/images/full/917/1-jpg.jpg', id: 1004},
                             { country: 'Chile',name: 'Atacama', url: 'http://i.telegraph.co.uk/multimedia/archive/03225/atacama-desert_3225940c.jpg', id: 1005},
                             { country: 'Colombia',name: 'Medellin', url: 'http://xpat.s3.amazonaws.com/wp-content/uploads/2015/08/28151313/2Escobars_PabloEscobar.jpg', id: 1006},
@@ -129,10 +134,29 @@ var Countries = React.createClass({
                         ];
 
                             var visitUrl = "";
+                            var visitLat;
+                            var visitLong;
+
+                            var marker;
+
                             console.log(visitList2);
                             for (var i = 0; i < visitList2.length; i++){
                               if (visitList2[i].name == l) {
                                 visitUrl = visitList2[i].url;
+                                visitLat = visitList2[i].lat;
+                                visitLong = visitList2[i].long;
+                                markerLabel += 1;
+
+                                map.setCenter({lat: visitLat, lng: visitLong});
+
+                                marker = new google.maps.Marker({
+                                                        position: {lat: visitLat, lng: visitLong},
+                                                        map: map,
+                                                        label: markerLabel.toString(),
+                                                        title: 'Hello World!'
+                                                      });
+
+
                               }
                             }
 
@@ -148,6 +172,7 @@ var Countries = React.createClass({
 
                       <hr />
                       <h5>My trip on Google map:</h5>
+                      <div id="map"></div>
 
 
                 </div>)
