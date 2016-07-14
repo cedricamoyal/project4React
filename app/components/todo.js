@@ -13,6 +13,8 @@ import ReactDOM from 'react-dom';
 
 ////////////////
 
+
+
 var TodoList = React.createClass({
   render: function() {
     var createItem = function(item) {
@@ -28,6 +30,7 @@ var ToDo = React.createClass({
   onChange: function(e) {
     this.setState({text: e.target.value});
   },
+
   handleSubmit: function(e) {
     e.preventDefault();
     var nextItems = this.state.items.concat([{text: this.state.text, id: Date.now()}]);
