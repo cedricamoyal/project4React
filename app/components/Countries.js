@@ -112,7 +112,7 @@ var Countries = React.createClass({
         return (<div id="inside">
                     <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Where are we going?" />
                     <br />
-                    <h5>The country list:</h5>
+                    <h5>List of Countries:</h5>
 
                         { countryList.map(function(l){
                             return (
@@ -125,7 +125,7 @@ var Countries = React.createClass({
 
 
                     <hr />
-                    <h5>The visit list:</h5>
+                    <h5>Places to Visit:</h5>
 
 
                         { visitList.map(function(l){
@@ -138,12 +138,11 @@ var Countries = React.createClass({
                         }) }
 
                     <hr />
-                    <h5>My trip steps:</h5>
+                    <h5>My Favourite Places: </h5>
 
                     <div id="myTripSteps">
 
                       { this.state.favouriteVisits.map(function(l){
-
                         keyIdSteps += 1;
 
                         var visitList2 = [
